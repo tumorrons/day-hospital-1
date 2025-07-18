@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Reparto Ospedaliero</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <h1>🏥 Gestione Reparto Ospedaliero</h1>
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showSection('main')">Pazienti</button>
+            <button class="nav-btn" onclick="showSection('config')">Configurazione</button>
+        </div>
+    </div>
+
+    <!-- Room Selector Modal -->
+    <div id="room-selector" class="room-selector">
+        <div class="room-selector-content">
+            <div class="room-selector-header">
+                <h3>Sposta Paziente</h3>
+                <p id="room-selector-patient-info">Seleziona una nuova stanza</p>
+            </div>
+            <div id="room-options" class="room-options">
+                <!-- Le opzioni delle stanze verranno generate dinamicamente -->
+            </div>
+            <div class="room-selector-buttons">
+                <button class="btn btn-primary" onclick="confirmRoomMove()">Sposta</button>
+                <button class="btn btn-secondary" onclick="closeRoomSelector()">Annulla</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="main-content" class="main-content">
+            <div class="main-header">
+                <h2>Pazienti del Reparto</h2>
+                <button class="btn btn-primary" onclick="printDailyReport()">📄 Stampa Giornata</button>
+            </div>
+            <div id="patients-container" class="patients-grid"></div>
+        </div>
+
+        <div id="config-section" class="config-section">
+            <div class="config-group">
+                <h3>Configurazione Reparto</h3>
+                <label for="patient-count">Numero di pazienti:</label>
+                <input type="number" id="patient-count" class="config-input" value="15" min="1" max="50">
+            </div>
+
+            <div class="config-group">
+                <h3>Configurazione Stanze</h3>
+                <div id="rooms-config" class="rooms-config"></div>
+            </div>
+
+            <div class="config-group">
+                <h3>Configurazione Etichette Pazienti</h3>
+                <div id="patient-labels-config" class="rooms-config"></div>
+            </div>
+
+            <div class="config-group">
+                <h3>Configurazione Interventi</h3>
+                <div id="interventions-config" class="tasks-config"></div>
+                <button class="btn btn-success" onclick="addInterventionConfig()">+ Aggiungi Intervento</button>
+            </div>
+
+            <div class="config-group">
+                <h3>Configurazione Avvisi per Interventi</h3>
+                <div id="intervention-alerts-config">
+                    <p>Seleziona un intervento per configurare i suoi avvisi:</p>
+                    <select id="intervention-selector" onchange="showInterventionAlertsConfig(this.value)">
+                        <option value="">Seleziona intervento</option>
+                    </select>
+                    <div id="alerts-for-intervention" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+
+            <div class="config-group">
+                <h3>Configurazione Campi Paziente</h3>
+                <div id="patient-fields-config" class="tasks-config"></div>
+                <button class="btn btn-success" onclick="addPatientFieldConfig()">+ Aggiungi Campo</button>
+            </div>
+
+            <div class="config-group">
+                <h3>Configurazione Attività</h3>
+                <div id="tasks-config" class="tasks-config"></div>
+                <button class="btn btn-success" onclick="addTaskConfig()">+ Aggiungi Attività</button>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="saveConfig()">Salva Configurazione</button>
+                <button class="btn btn-secondary" onclick="loadConfig()">Carica Configurazione</button>
+                <button class="btn btn-danger" onclick="resetConfig()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="patientManager.js"></script>
+    <script src="roomManager.js"></script>
+    <script src="printManager.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
