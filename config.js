@@ -57,13 +57,19 @@ function loadConfig() {
     }
     initializeRoomsAndLabels();
     updateConfigUI();
-    generatePatients();
+    
+    // Assicurati che generatePatients sia definita prima di chiamarla
+    if (typeof generatePatients === 'function') {
+        generatePatients();
+    }
 }
 
 // Salva configurazione nel localStorage
 function saveConfig() {
     localStorage.setItem('wardConfig', JSON.stringify(config));
-    generatePatients();
+    if (typeof generatePatients === 'function') {
+        generatePatients();
+    }
     alert('Configurazione salvata con successo!');
 }
 
@@ -246,7 +252,28 @@ function addAlertConfig(intervention) {
         config.interventionAlerts[intervention].push(alertText.trim());
         showInterventionAlertsConfig(intervention);
     }
-}="btn btn-danger" onclick="removePatientFieldConfig(${index})">Rimuovi</button>
+}
+
+// Funzioni globali per le chiamate onClick nell'HTML
+window.loadConfig = loadConfig;
+window.saveConfig = saveConfig;
+window.resetConfig = resetConfig;
+window.updateRoomConfig = updateRoomConfig;
+window.updatePatientLabelConfig = updatePatientLabelConfig;
+window.updatePatientFieldConfig = updatePatientFieldConfig;
+window.removePatientFieldConfig = removePatientFieldConfig;
+window.addPatientFieldConfig = addPatientFieldConfig;
+window.updateTaskConfig = updateTaskConfig;
+window.removeTaskConfig = removeTaskConfig;
+window.addTaskConfig = addTaskConfig;
+window.updateInterventionConfig = updateInterventionConfig;
+window.removeInterventionConfig = removeInterventionConfig;
+window.addInterventionConfig = addInterventionConfig;
+window.updateInterventionAlertsSelector = updateInterventionAlertsSelector;
+window.showInterventionAlertsConfig = showInterventionAlertsConfig;
+window.updateAlertConfig = updateAlertConfig;
+window.removeAlertConfig = removeAlertConfig;
+window.addAlertConfig = addAlertConfig;="btn btn-danger" onclick="removePatientFieldConfig(${index})">Rimuovi</button>
         `;
         fieldsContainer.appendChild(fieldItem);
     });

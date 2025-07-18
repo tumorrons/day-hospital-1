@@ -153,3 +153,6 @@ function printDailyReport() {
         printWindow.close();
     }, 500);
 }
+
+// Funzioni globali per le chiamate onClick nell'HTML
+window.printDailyReport = printDailyReport;

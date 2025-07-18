@@ -170,3 +170,8 @@ function closeRoomSelector() {
     currentPatientToMove = null;
     selectedRoom = null;
 }
+
+// Funzioni globali per le chiamate onClick nell'HTML
+window.openRoomSelector = openRoomSelector;
+window.confirmRoomMove = confirmRoomMove;
+window.closeRoomSelector = closeRoomSelector;
